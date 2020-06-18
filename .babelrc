@@ -1,0 +1,14 @@
+{
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": ["./src", "./public"],
+        "alias": {
+          "test": "./test",
+          "chartist": "./node_modules/chartist/dist"
+        }
+      }
+    ]
+  ]
+}

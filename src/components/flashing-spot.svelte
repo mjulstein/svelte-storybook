@@ -5,32 +5,34 @@
   export let status = 'ok';
   export let flashSize = '100px';
   export let spotSize = '20px';
-  export let customColor = '';
-  if (customColor) {
+  export let color = '';
+  if (color) {
     status = 'custom';
+  }
+  switch (status) {
+    case 'ok':
+      color = 'var(--ok-color)';
+      break;
+    case 'notice':
+      color = 'var(--notice-color)';
+      break;
+    case 'warning':
+      color = 'var(--warning-color)';
+      break;
+    case 'error':
+      color = 'var(--error-color)';
+      break;
+    case 'critical':
+      color = 'var(--critical-color)';
+      break;
+    default:
+      break;
   }
 </script>
 
 <style>
-  .ok > .flash,
-  .ok > .spot {
-    background-color: var(--ok-color);
-  }
-  .notice > .flash,
-  .notice > .spot {
-    background-color: var(--notice-color);
-  }
-  .warning > .flash,
-  .warning > .spot {
-    background-color: var(--warning-color);
-  }
-  .error > .flash,
-  .error > .spot {
-    background-color: var(--error-color);
-  }
-  .critical > .flash,
-  .critical > .spot {
-    background-color: var(--critical-color);
+  .flash-container > div {
+    background-color: var(--color);
   }
   .flash-container {
     position: relative;
@@ -94,8 +96,8 @@
 </style>
 
 <div
-  style="--flash-size:{flashSize};--spot-size:{spotSize};{customColor ? `--color:${customColor};` : ''}"
-  class="flash-container {status}">
+  style="--flash-size:{flashSize};--spot-size:{spotSize};{color ? `--color:${color};` : ''}"
+  class="flash-container">
   <div class="flash" />
   <div class="spot" />
 </div>

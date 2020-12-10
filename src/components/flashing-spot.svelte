@@ -3,12 +3,13 @@
    * @type {'ok'|'notice'|'warning'|'error'|'critical'|'custom'}
    */
   export let status = 'ok';
-  export let flashSize = '100px';
   export let spotSize = '20px';
+  export let flash = 3.1;
   export let color = '';
   if (color) {
     status = 'custom';
   }
+
   switch (status) {
     case 'ok':
       color = 'var(--ok-color)';
@@ -28,6 +29,8 @@
     default:
       break;
   }
+  $: flashSize = `calc( ${spotSize} * ${flash} )`;
+  $: console.log(flashSize);
 </script>
 
 <style>
@@ -35,7 +38,10 @@
     background-color: var(--color);
   }
   .flash-container {
+    height: var(--spot-size);
+    width: var(--spot-size);
     position: relative;
+    display: inline-block;
   }
   .flash-container > * {
     pointer-events: none;
@@ -97,7 +103,7 @@
 
 <div
   style="--flash-size:{flashSize};--spot-size:{spotSize};{color ? `--color:${color};` : ''}"
-  class="flash-container">
+  class="flash-container {status}">
   <div class="flash" />
   <div class="spot" />
 </div>
